@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AfterDerm</title>
+  <meta name="description" content="Neutral dermatology education with product recommendations.">
+  <style>
+    :root{
+      --brand:#0e3a75;           /* deep navy */
+      --brand-2:#174ea6;         /* accent */
+      --ink:#0a0a0a;
+      --muted:#6b7280;
+      --bg:#ffffff;
+      --surface:#f5f7fb;
+      --card:#ffffff;
+      --link:#2563eb;
+      --radius:14px;
+      --shadow:0 6px 24px rgba(3, 15, 40, .07);
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font:16px/1.55 system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;color:var(--ink);background:var(--bg)}
+    a{color:var(--link);text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    /* Top bar */
+    .top{
+      position:sticky;top:0;z-index:10;
+      background:var(--bg);
+      border-bottom:1px solid #e5e7eb;
+    }
+    .top-inner{display:flex;align-items:center;gap:16px;padding:14px 20px;max-width:1200px;margin:0 auto}
+    .logo{display:flex;align-items:center;gap:10px;font-weight:700;color:var(--brand)}
+    .pill{padding:8px 12px;border:1px solid #e5e7eb;border-radius:999px;color:var(--ink);background:#fff}
+    .menu{margin-left:auto;display:flex;gap:10px;flex-wrap:wrap}
+    .menu a{padding:8px 12px;border-radius:10px;color:var(--ink)}
+    .menu a.active{background:var(--surface);font-weight:600}
+
+    /* Layout */
+    .wrap{max-width:1200px;margin:0 auto;padding:28px 20px;display:grid;grid-template-columns:260px 1fr;gap:24px}
+    @media (max-width: 900px){.wrap{grid-template-columns:1fr}}
+
+    /* Sidebar */
+    .side{background:var(--surface);border-radius:var(--radius);padding:16px;border:1px solid #e5e7eb}
+    .side h3{margin:6px 6px 10px;color:var(--brand);font-size:14px;letter-spacing:.02em;text-transform:uppercase}
+    .nav{list-style:none;margin:0;padding:0}
+    .nav li{margin:2px 0}
+    .nav a{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border-radius:10px;color:var(--ink)}
+    .nav a:hover{background:#eaf0fb}
+    .nav a[aria-current="page"]{background:#dfe9ff;color:#0b2f64;font-weight:600}
+
+    /* Main */
+    .section{display:none}
+    .section.active{display:block}
+
+    .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:24px}
+    @media (max-width: 900px){.hero{grid-template-columns:1fr}}
+
+    .card{background:var(--card);border:1px solid #e5e7eb;border-radius:var(--radius);box-shadow:var(--shadow)}
+    .card .in{padding:18px}
+    .card h2{margin:0 0 8px;font-size:22px;color:var(--brand)}
+    .muted{color:var(--muted)}
+
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    @media (max-width: 1000px){.grid{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width: 640px){.grid{grid-template-columns:1fr}}
+
+    .product{display:flex;gap:14px}
+    .product img{width:72px;height:72px;border-radius:10px;object-fit:cover;border:1px solid #e5e7eb}
+    .product h4{margin:0 0 6px;font-size:16px}
+    .badge{display:inline-block;background:#eef2ff;color:#3730a3;padding:2px 8px;border-radius:999px;font-size:12px;font-weight:600}
+
+    .notice{background:#f8fafc;border:1px solid #e5e7eb;padding:14px;border-radius:12px;font-size:14px}
+    .cta{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;background:var(--brand);color:white;border:none;cursor:pointer}
+    .cta.secondary{background:#111827}
+
+    footer{border-top:1px solid #e5e7eb;margin-top:40px;padding:18px 0;color:#6b7280;font-size:14px}
+  </style>
+</head>
+<body>
+  <!-- Top bar -->
+  <header class="top" role="banner">
+    <div class="top-inner">
+      <div class="logo" aria-label="AfterDerm">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><path d="M7 13c3 3 7 3 10 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        AfterDerm
+      </div>
+      <nav class="menu" aria-label="Primary">
+        <a href="#home" data-route>Diseases & Conditions</a>
+        <a href="#care" data-route>Everyday Care</a>
+        <a href="#treatments" data-route>Cosmetic Treatments</a>
+        <a href="#public-health" data-route>Public Health</a>
+      </nav>
+      <a class="pill" href="#about">About</a>
+    </div>
+  </header>
+
+  <main class="wrap" role="main">
+    <!-- Sidebar -->
+    <aside class="side" aria-label="Conditions directory">
+      <h3>Diseases & Conditions</h3>
+      <ul class="nav">
+        <li><a href="#acne" data-route>Acne</a></li>
+        <li><a href="#eczema" data-route>Eczema</a></li>
+        <li><a href="#psoriasis" data-route>Psoriasis</a></li>
+        <li><a href="#rosacea" data-route>Rosacea</a></li>
+        <li><a href="#hair-loss" data-route>Hair loss</a></li>
+        <li><a href="#a-to-z" data-route>A to Z (All)</a></li>
+      </ul>
+    </aside>
+
+    <!-- HOME / FEATURED -->
+    <section id="home" class="section active" aria-labelledby="home-title">
+      <div class="hero">
+        <article class="card">
+          <div class="in">
+            <h2 id="home-title">Featured: Understanding eczema flares</h2>
+            <p class="muted">Research-backed guidance to help calm itchy, irritated skin—and everyday tips that support your skin barrier.</p>
+            <p><a class="cta" href="#eczema" data-route>Read eczema guide →</a></p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="in">
+            <h2>New: Build a simple routine</h2>
+            <p class="muted">Short, dermatologist‑trusted routines for acne, rosacea, psoriasis, and more—plus OTC product picks.</p>
+            <p><a class="cta secondary" href="#a-to-z" data-route>Browse all conditions</a></p>
+          </div>
+        </article>
+      </div>
+
+      <h2 style="margin:22px 0 10px;color:var(--brand)">Popular topics</h2>
+      <div class="grid" role="list">
+        <article class="card" role="listitem"><div class="in"><h3>Acne basics</h3><p class="muted">Why breakouts happen and what helps.</p><p><a href="#acne" data-route>Open acne guide →</a></p></div></article>
+        <article class="card" role="listitem"><div class="in"><h3>Psoriasis itch relief</h3><p class="muted">Relief options and when to follow up.</p><p><a href="#psoriasis" data-route>Open psoriasis guide →</a></p></div></article>
+        <article class="card" role="listitem"><div class="in"><h3>Rosacea triggers</h3><p class="muted">Common triggers and calming care.</p><p><a href="#rosacea" data-route>Open rosacea guide →</a></p></div></article>
+      </div>
+    </section>
+
+    <!-- Secondary sections for top navigation -->
+    <section id="care" class="section" aria-labelledby="care-title">
+      <article class="card"><div class="in">
+        <h2 id="care-title">Everyday care</h2>
+        <p class="muted">Gentle routines, moisturizers, and sunscreen basics. Explore condition‑specific guides for step‑by‑step help.</p>
+        <p><a href="#a-to-z">Browse conditions A → Z</a></p>
+      </div></article>
+    </section>
+
+    <section id="treatments" class="section" aria-labelledby="treatments-title">
+      <article class="card"><div class="in">
+        <h2 id="treatments-title">Cosmetic treatments</h2>
+        <p class="muted">Educational overviews only—consult a board‑certified professional for personal recommendations.</p>
+      </div></article>
+    </section>
+
+    <section id="public-health" class="section" aria-labelledby="public-title">
+      <article class="card"><div class="in">
+        <h2 id="public-title">Public health & prevention</h2>
+        <p class="muted">Sun safety, skin cancer checks, and seasonal guidance to keep skin healthy.</p>
+      </div></article>
+    </section>
+
+    <!-- CONDITION TEMPLATE SECTIONS -->
+    <section id="acne" class="section" aria-labelledby="acne-title">
+      <article class="card"><div class="in">
+        <h2 id="acne-title">Acne: basics & care</h2>
+        <p class="muted">What it is: clogged pores and inflammation can lead to whiteheads, blackheads, and pimples. Gentle cleansing plus targeted actives help.</p>
+        <div class="notice" role="note">Educational only. Not a substitute for medical care. If acne is scarring, painful, or persistent, see a dermatologist.</div>
+      </div></article>
+
+      <h3 style="color:var(--brand);margin:18px 0 10px">Derm‑trusted over‑the‑counter picks</h3>
+      <div class="grid" id="acne-products"></div>
+
+      <article class="card" style="margin-top:18px"><div class="in">
+        <h3>Routine tips</h3>
+        <ul>
+          <li>Wash once or twice daily with a gentle or salicylic acid cleanser.</li>
+          <li>Use a benzoyl‑peroxide product for inflamed spots.</li>
+          <li>Moisturize to protect your barrier; add sunscreen every morning.</li>
+        </ul>
+      </div></article>
+    </section>
+
+    <section id="eczema" class="section" aria-labelledby="eczema-title">
+      <article class="card"><div class="in">
+        <h2 id="eczema-title">Eczema: calm & protect</h2>
+        <p class="muted">Eczema (atopic dermatitis) flares when the skin barrier is damaged. Daily moisturizers and trigger management are key.</p>
+        <div class="notice">Educational only. If infection, oozing, or widespread rash occurs, contact your clinician.</div>
+      </div></article>
+      <h3 style="color:var(--brand);margin:18px 0 10px">OTC moisturizers & relief</h3>
+      <div class="grid" id="eczema-products"></div>
+    </section>
+
+    <section id="psoriasis" class="section" aria-labelledby="psoriasis-title">
+      <article class="card"><div class="in">
+        <h2 id="psoriasis-title">Psoriasis: soothe itch & hydrate</h2>
+        <p class="muted">Thick, scaly plaques form due to rapid skin turnover. Hydration and anti‑itch ingredients can help between prescriptions.</p>
+        <div class="notice">Educational only. Talk to your dermatologist about prescription options and when to escalate treatment.</div>
+      </div></article>
+      <h3 style="color:var(--brand);margin:18px 0 10px">Barrier‑supporting moisturizers</h3>
+      <div class="grid" id="psoriasis-products"></div>
+    </section>
+
+    <section id="rosacea" class="section" aria-labelledby="rosacea-title">
+      <article class="card"><div class="in">
+        <h2 id="rosacea-title">Rosacea: calm & protect</h2>
+        <p class="muted">Rosacea often includes flushing and sensitivity. Gentle care + sun protection are essentials; avoid common triggers.</p>
+        <div class="notice">Educational only. If you have eye symptoms, swelling, or persistent burning, seek medical care.</div>
+      </div></article>
+      <h3 style="color:var(--brand);margin:18px 0 10px">Gentle moisturizers & cleansers</h3>
+      <div class="grid" id="rosacea-products"></div>
+    </section>
+
+    <section id="hair-loss" class="section" aria-labelledby="hair-title">
+      <article class="card"><div class="in">
+        <h2 id="hair-title">Hair loss: overview</h2>
+        <p class="muted">Hair thinning has many causes. This page offers general care tips and OTC options that support scalp health.</p>
+        <div class="notice">Educational only. Sudden shedding or patchy loss warrants evaluation.</div>
+      </div></article>
+      <h3 style="color:var(--brand);margin:18px 0 10px">Gentle scalp care</h3>
+      <div class="grid" id="hair-products"></div>
+    </section>
+
+    <section id="a-to-z" class="section" aria-labelledby="atoz-title">
+      <article class="card"><div class="in">
+        <h2 id="atoz-title">Browse conditions A → Z</h2>
+        <p class="muted">Quick links to each guide. Use QR codes on patient cards to deep‑link here.</p>
+        <ul style="columns:2;max-width:760px;padding-left:18px">
+          <li><a href="#acne" data-route>Acne</a></li>
+          <li><a href="#eczema" data-route>Eczema</a></li>
+          <li><a href="#psoriasis" data-route>Psoriasis</a></li>
+          <li><a href="#rosacea" data-route>Rosacea</a></li>
+          <li><a href="#hair-loss" data-route>Hair loss</a></li>
+        </ul>
+      </div></article>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap" style="padding:0 20px">
+      <div>© <span id="year"></span> AfterDerm • Educational only • Not affiliated with any practice.</div>
+    </div>
+  </footer>
+
+  <script>
+    // ---------- Simple router (hash-based) + active state ----------
+    const routes = Array.from(document.querySelectorAll('[data-route]'));
+    const sections = Array.from(document.querySelectorAll('.section'));
+    const sideLinks = Array.from(document.querySelectorAll('.nav a'));
+    const topLinks = Array.from(document.querySelectorAll('.menu a'));
+
+    function show(id){
+      // If route doesn't exist, default to home
+      if(!document.getElementById(id)) id = 'home';
+      sections.forEach(s => s.classList.toggle('active', s.id === id));
+      sideLinks.forEach(a => {
+        const target = (a.getAttribute('href')||'').replace('#','');
+        a.setAttribute('aria-current', target === id ? 'page' : 'false');
+      });
+      topLinks.forEach(a => {
+        const target = (a.getAttribute('href')||'').replace('#','');
+        a.classList.toggle('active', target === id);
+      });
+    }
+
+    function handleHash(){
+      const id = (location.hash || '#home').replace('#','');
+      show(id);
+    }
+
+    addEventListener('hashchange', handleHash);
+    addEventListener('DOMContentLoaded', () => {
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      // Global delegated click handler for in-page links (e.g., #acne)
+      document.addEventListener('click', (e) => {
+        const a = e.target.closest('a');
+        if(!a) return;
+        const href = a.getAttribute('href') || '';
+        if(href.startsWith('#')){
+          e.preventDefault();
+          const id = href.slice(1);
+          location.hash = '#' + id;
+          show(id);
+        }
+      });
+
+      handleHash();
+      renderProducts();
+      // Allow "?c=eczema" style QR deep links as well
+      const usp = new URLSearchParams(location.search);
+      const c = usp.get('c');
+      if(c && document.getElementById(c)) location.hash = '#' + c;
+    });
+      // Intercept internal nav clicks so some preview environments (iframes)
+      // don’t try to navigate the whole frame and block content.
+      document.querySelectorAll('a[data-route]').forEach(a => {
+        a.addEventListener('click', (e) => {
+          const href = a.getAttribute('href') || '';
+          if (href.startsWith('#')) {
+            e.preventDefault();
+            const id = href.slice(1);
+            location.hash = '#' + id;
+            show(id);
+          }
+        });
+      });
+
+      handleHash();
+      renderProducts();
+      // Allow "?c=eczema" style QR deep links as well
+      const usp = new URLSearchParams(location.search);
+      const c = usp.get('c');
+      if(c && document.getElementById(c)) location.hash = '#' + c;
+    });
+      handleHash();
+      renderProducts();
+      // Allow "?c=eczema" style QR deep links as well
+      const usp = new URLSearchParams(location.search);
+      const c = usp.get('c');
+      if(c && document.getElementById(c)) location.hash = '#' + c;
+    });
+
+    // ---------- Product data (CeraVe / La Roche‑Posay) ----------
+    // Replace the `url` values with your affiliate links. The images are
+    // free CDN placeholders; swap for product images as needed.
+    const PRODUCTS = {
+      acne: [
+        {brand:'CeraVe', name:'Acne Control Cleanser (2% SA)', url:'https://www.amazon.com/CeraVe-Treatment-Salicylic-Purifying-Comedogenic/dp/B0C7JJG6BB?tag=YOURTAG', img:'https://images.unsplash.com/photo-1585238342025-78a3f2a36b1a?q=80&w=300&auto=format&fit=crop', note:'Salicylic acid + niacinamide + clay to decongest pores.'},
+        {brand:'CeraVe', name:'Acne Foaming Cream Cleanser (4% BP)', url:'https://www.amazon.com/CeraVe-Treatment-Hyaluronic-Niacinamide-Sensitive/dp/B07YLJPMC3?tag=YOURTAG', img:'https://images.unsplash.com/photo-1608248597279-d76c31004f91?q=80&w=300&auto=format&fit=crop', note:'Benzoyl peroxide targets acne‑causing bacteria.'},
+        {brand:'La Roche‑Posay', name:'Effaclar Duo (SA acne treatment)', url:'https://www.amazon.com/Roche-Posay-Mattifying-Blackheads-Whiteheads-Non-Greasy/dp/B0F3CD1Y9B?tag=YOURTAG', img:'https://images.unsplash.com/photo-1585386959984-a41552231658?q=80&w=300&auto=format&fit=crop', note:'Leave‑on treatment to reduce breakouts & marks.'},
+        {brand:'La Roche‑Posay', name:'Toleriane Hydrating Gentle Cleanser', url:'https://www.amazon.com/Roche-Posay-Toleriane-Hydrating-Gentle-Cleanser/dp/B01N7T7JKJ?tag=YOURTAG', img:'https://images.unsplash.com/photo-1585238341569-7139c75b10b1?q=80&w=300&auto=format&fit=crop', note:'Balanced cleanser for sensitive, acne‑prone skin.'}
+      ],
+      eczema: [
+        {brand:'CeraVe', name:'Moisturizing Cream (19 oz)', url:'https://www.amazon.com/CeraVe-Moisturizing-Cream-Daily-Moisturizer/dp/B00TTD9BRC?tag=YOURTAG', img:'https://images.unsplash.com/photo-1585238342025-78a3f2a36b1a?q=80&w=300&auto=format&fit=crop', note:'Ceramides + HA; NEA accepted; barrier support.'},
+        {brand:'CeraVe', name:'Eczema Relief Creamy Oil', url:'https://www.amazon.com/Moisturizer-Colloidal-Oatmeal-Ceramides-Safflower/dp/B08PCV4QNH?tag=YOURTAG', img:'https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=300&auto=format&fit=crop', note:'Colloidal oatmeal to soothe dry, itchy skin.'},
+        {brand:'La Roche‑Posay', name:'Lipikar Balm AP+ (Triple Repair)', url:'https://www.amazon.com/Roche-Posay-Lipikar-Intense-Repair-Cream/dp/B003QXZWYW?tag=YOURTAG', img:'https://images.unsplash.com/photo-1595433707802-6b2626ef1c86?q=80&w=300&auto=format&fit=crop', note:'Niacinamide + shea butter; long‑lasting hydration.'},
+        {brand:'La Roche‑Posay', name:'Lipikar Eczema Soothing Relief Cream', url:'https://www.amazon.com/Roche-Posay-Lipikar-Soothing-Colloidal-Oatmeal/dp/B076WJXJBG?tag=YOURTAG', img:'https://images.unsplash.com/photo-1556228724-4f1204f6dc32?q=80&w=300&auto=format&fit=crop', note:'Colloidal oatmeal + thermal spring water.'}
+      ],
+      psoriasis: [
+        {brand:'CeraVe', name:'Psoriasis Moisturizing Cream', url:'https://www.amazon.com/CeraVe-Moisturizing-Psoriasis-Treatment-Salicylic/dp/B075N8392D?tag=YOURTAG', img:'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=300&auto=format&fit=crop', note:'Urea + lactic acid gently smooth; ceramides moisturize.'},
+        {brand:'CeraVe', name:'Psoriasis Cleanser', url:'https://www.amazon.com/CeraVe-Psoriasis-Therapy-Cleanser-Ounce/dp/B075N8CDGT?tag=YOURTAG', img:'https://images.unsplash.com/photo-1600180758890-6b94519a8ba6?q=80&w=300&auto=format&fit=crop', note:'Salicylic acid + lactic acid for flaky, itchy skin.'},
+        {brand:'La Roche‑Posay', name:'Cicaplast Balm B5 (soothing repair cream)', url:'https://www.amazon.com/Roche-Posay-Cicaplast-Baume-Multi-Purpose-Butter/dp/B0060OUV5Y?tag=YOURTAG', img:'https://images.unsplash.com/photo-1556228724-4f1204f6dc32?q=80&w=300&auto=format&fit=crop', note:'Multi‑purpose soothing balm for irritated areas.'}
+      ],
+      rosacea: [
+        {brand:'La Roche‑Posay', name:'Toleriane Double Repair Moisturizer', url:'https://www.amazon.com/Roche-Posay-Toleriane-Double-Repair-Moisturizer/dp/B01N9SPQHQ?tag=YOURTAG', img:'https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?q=80&w=300&auto=format&fit=crop', note:'Lightweight, fragrance‑free hydration for sensitive skin.'},
+        {brand:'La Roche‑Posay', name:'Toleriane Hydrating Gentle Cleanser', url:'https://www.amazon.com/Roche-Posay-Toleriane-Hydrating-Gentle-Cleanser/dp/B01N7T7JKJ?tag=YOURTAG', img:'https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?q=80&w=300&auto=format&fit=crop', note:'Gentle cleanse to reduce irritation.'},
+        {brand:'La Roche‑Posay', name:'Anthelios Mineral Sunscreen SPF 50 (face)', url:'https://www.amazon.com/Roche-Posay-Anthelios-Sunscreen-Ultra-Light-Titanium/dp/B004W55086?tag=YOURTAG', img:'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=300&auto=format&fit=crop', note:'100% mineral SPF, cosmetic‑elegant finish.'},
+        {brand:'CeraVe', name:'Hydrating Mineral Sunscreen SPF 50 (face)', url:'https://www.amazon.com/Mineral-Sunscreen-Titanium-Dioxide-Sensitive/dp/B07KLY4RYG?tag=YOURTAG', img:'https://images.unsplash.com/photo-1530639836816-0a501f7430d3?q=80&w=300&auto=format&fit=crop', note:'Mineral SPF with ceramides + niacinamide.'}
+      ]
+    };
+
+    function productCard(p){(p){
+      return `
+        <article class="card">
+          <div class="in product">
+            <img alt="${p.name}" src="${p.img}" loading="lazy"/>
+            <div>
+              <h4>${p.name}</h4>
+              <div class="badge">${p.brand}</div>
+              <p class="muted" style="margin:8px 0 12px">${p.note}</p>
+              <a class="cta" href="${p.url}" target="_blank" rel="nofollow noopener">See product</a>
+            </div>
+          </div>
+        </article>`;
+    }
+
+    function renderProducts(){
+      const m = (id, list) => document.getElementById(id).innerHTML = list.map(productCard).join('');
+      m('acne-products', PRODUCTS.acne);
+      m('eczema-products', PRODUCTS.eczema);
+      m('psoriasis-products', PRODUCTS.psoriasis);
+      m('rosacea-products', PRODUCTS.rosacea);
+      m('hair-products', PRODUCTS.hair);
+    }
+  </script>
+</body>
+</html>
+
