@@ -1,11 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'export',
+  trailingSlash: true,
   images: {
-    remotePatterns: [
-      { protocol: 'https', hostname: 'www.cerave.com' },
-      { protocol: 'https', hostname: 'www.laroche-posay.us' },
-      { protocol: 'https', hostname: 'm.media-amazon.com' }
-    ]
+    unoptimized: true
   }
 };
 module.exports = nextConfig;

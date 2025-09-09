@@ -44,7 +44,7 @@ Neutral, educational dermatology guides (modeled on AAD’s “Diseases & Condit
 
 **Affiliate:** “Some links are affiliate links. If you buy through them, we may earn a small commission at no extra cost to you.”
 
-**Non‑affiliation:** “This site is independent and not affiliated with Frontier Dermatology, the AAD, or any specific practice.”
+**Non‑affiliation:** “This site is independent and not affiliated the AAD, or any specific practice.”
 
 ## 6) Monetization model (stable framing)
 
