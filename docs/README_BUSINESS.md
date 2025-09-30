@@ -2,6 +2,8 @@
 
 > **Purpose:** Keep the business context, positioning, and operating principles bundled with the codebase. This document is designed to remain useful until the business model materially changes.
 
+> **See also:** `BUSINESS_MODEL.md` for strategic context, market positioning, and growth phases.
+
 ## 1) One‑liner
 
 Neutral, educational dermatology guides (modeled on AAD’s “Diseases & Conditions” structure) that pair plain‑language care overviews with a small set of **dermatologist‑trusted OTC products** and **affiliate links**. Distributed primarily via **QR cards handed out in clinic**.
