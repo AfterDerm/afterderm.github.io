@@ -1,3 +1,5 @@
+'use client';
+import { useState } from 'react';
 import Link from 'next/link';
 
 function withAffiliate(url) {
@@ -14,23 +16,40 @@ function withAffiliate(url) {
 }
 
 export default function ProductCard({ p }) {
+  const [imageError, setImageError] = useState(false);
+
   return (
-    <article className="bg-white border border-gray-200 rounded-2xl shadow-[0_6px_24px_rgba(3,15,40,0.07)] overflow-hidden flex flex-col h-full" itemScope itemType="https://schema.org/Product">
-      {p.image ? (
-        // Using plain <img> to keep the project minimal and avoid extra Next/Image config
-        <img src={p.image} alt={p.name} className="w-full h-[200px] object-contain bg-gray-50 border-b border-gray-200" loading="lazy" />
+    <div className="group relative flex flex-col overflow-hidden rounded-lg border border-gray-200 bg-white">
+      {p.image && !imageError ? (
+        <div className="aspect-[3/4] w-full bg-gray-200 sm:aspect-auto sm:h-96 overflow-hidden">
+          <img
+            src={p.image}
+            alt={p.name}
+            className="h-full w-full object-contain group-hover:opacity-75 transition-opacity"
+            loading="lazy"
+            onError={() => setImageError(true)}
+          />
+        </div>
       ) : (
-        <div className="w-full h-[200px] bg-gray-50 border-b border-gray-200" role="img" aria-label={p.name}></div>
+        <div className="aspect-[3/4] w-full bg-gradient-to-br from-gray-100 to-gray-200 sm:aspect-auto sm:h-96 flex items-center justify-center" role="img" aria-label={p.name}>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-24 h-24 text-gray-400">
+            <path strokeLinecap="round" strokeLinejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+          </svg>
+        </div>
       )}
-      <div className="p-[18px]">
-        <div className="text-base font-semibold mb-1.5" itemProp="name">{p.name}</div>
-        <div className="text-gray-500">{p.brand}</div>
-        {p.note && <p className="text-gray-500 mt-2">{p.note}</p>}
-        <div className="mt-auto flex gap-2 items-center justify-between">
-          <Link className="inline-flex items-center gap-2 bg-[#0e3a75] text-white border-none rounded-[10px] py-[10px] px-3 font-semibold cursor-pointer no-underline hover:brightness-110" href={withAffiliate(p.amazonUrl)} target="_blank" rel="noopener noreferrer">Buy on Amazon</Link>
-          <span className="text-xs text-gray-500">{p.category}</span>
+      <div className="flex flex-1 flex-col space-y-2 p-4">
+        <h3 className="text-sm font-medium text-gray-900">
+          <Link href={withAffiliate(p.amazonUrl)} target="_blank" rel="noopener noreferrer" className="no-underline text-gray-900 hover:text-gray-700">
+            <span aria-hidden="true" className="absolute inset-0"></span>
+            {p.name}
+          </Link>
+        </h3>
+        {p.note && <p className="text-sm text-gray-500">{p.note}</p>}
+        <div className="flex flex-1 flex-col justify-end">
+          <p className="text-sm italic text-gray-500">{p.brand}</p>
+          <p className="text-sm font-medium text-gray-900">{p.category}</p>
         </div>
       </div>
-    </article>
+    </div>
   );
 }
